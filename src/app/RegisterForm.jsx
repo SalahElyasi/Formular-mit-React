@@ -3,20 +3,23 @@ import { NameInput } from './NameInput';
 import { TShirtSizeSelect } from './TShirtSizeSelect';
 import { LunchCheckbox } from './LunchCheckbox';
 
+const emptyForm = {
+
+            name: '',
+            tShirtSize: 'w-s',
+            lunch: false,
+            formSubmitted: false
+}
 
 export class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            name: '',
-            tShirtSize: 'w-s',
-            lunch: false,
-            formSubmitted: false
-        };
+        this.state = emptyForm;
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleResetForm = this.handleResetForm.bind(this);
 
     }
 
@@ -41,7 +44,9 @@ export class RegisterForm extends React.Component {
         });
     }
 
-    
+    handleResetForm() {
+        this.setState(emptyForm);
+    }
     
     render() {
         if (!this.state.formSubmitted) {
@@ -61,6 +66,7 @@ export class RegisterForm extends React.Component {
             return (
                 <div>
                     <h2>Du hast erfolgreich zum Event angemeldet!</h2>
+                    <button onClick={this.handleResetForm}>Weitere Teilnehmer anmelden</button>
                 </div>
             )
         }
